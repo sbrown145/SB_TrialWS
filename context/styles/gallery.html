@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style Library — 16 Boilerplates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Archivo+Black&family=Space+Mono:wght@400;700&family=Sora:wght@600;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&family=Baloo+2:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Righteous&family=Space+Grotesk:wght@400;500;700&family=Anton&family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #FAFAF8; color: #15140F;
+         font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* ---------- gallery chrome (neutral, stays out of the way) ---------- */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 56px 24px 80px; }
+  .masthead { border-bottom: 1px solid #E6E3DC; padding-bottom: 28px; margin-bottom: 40px; }
+  .masthead h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(34px, 6vw, 58px);
+                 line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 14px; }
+  .masthead p { font-size: 17px; line-height: 1.6; color: #57534A; max-width: 64ch; margin: 0; }
+  .masthead .how { margin-top: 16px; font-size: 14px; color: #57534A; }
+  .masthead code { font-family: 'JetBrains Mono', monospace; font-size: 13px;
+                   background: #EFEDE6; padding: 2px 7px; border-radius: 5px; }
+
+  .grid { display: grid; grid-template-columns: 1fr; gap: 36px; }
+  @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+  .panel { border: 1px solid #E6E3DC; border-radius: 16px; overflow: hidden; background: #fff;
+           box-shadow: 0 1px 2px rgba(0,0,0,.03); }
+  .panel-meta { padding: 22px 22px 18px; }
+  .panel-head { display: flex; gap: 14px; align-items: baseline; }
+  .panel-num { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 15px;
+               color: #B0AB9E; flex: none; }
+  .panel-name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 19px;
+                letter-spacing: -0.01em; margin: 0; }
+  .panel-desc { margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #6B6658; }
+  .panel-sub { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 14px; }
+  .swatches { display: inline-flex; gap: 6px; }
+  .swatches span { width: 18px; height: 18px; border-radius: 5px; border: 1px solid rgba(0,0,0,.08); }
+  .fonts { font-size: 12px; color: #8A8576; }
+  .file { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #57534A;
+          background: #F2F0E9; padding: 3px 8px; border-radius: 5px; }
+
+  /* ---------- shared demo component (driven entirely by per-style CSS vars) ---------- */
+  .demo { --kick-tt: uppercase; --chip-bd: none; }
+  .d-stage { position: relative; overflow: hidden; padding: 30px; background: var(--stage);
+             min-height: 232px; display: flex; align-items: center; border-top: 1px solid #E6E3DC; }
+  .d-card { position: relative; z-index: 1; width: 100%; background: var(--card-bg);
+            border: var(--card-bd, 0); border-radius: var(--radius, 14px);
+            box-shadow: var(--card-sh, none); padding: 24px; }
+  .d-kick { display: block; font-family: var(--kick-ff); font-weight: var(--kick-fw, 700);
+            text-transform: var(--kick-tt); letter-spacing: var(--kick-ls, 1px);
+            font-size: 12px; color: var(--kick-c); margin-bottom: 12px; }
+  .d-title { font-family: var(--title-ff); font-weight: var(--title-fw, 700);
+             text-transform: var(--title-tt, none); letter-spacing: var(--title-ls, 0);
+             line-height: var(--title-lh, 1.12); font-size: var(--title-fs, 27px);
+             color: var(--ink); margin: 0 0 12px; }
+  .d-title em { font-style: var(--em-style, italic); color: var(--em-c, inherit); }
+  .d-body { font-family: var(--body-ff); font-weight: var(--body-fw, 400); font-size: 15px;
+            line-height: 1.6; color: var(--body-c); margin: 0 0 18px; max-width: 48ch; }
+  .d-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .d-chip { display: inline-flex; align-items: center; font-family: var(--chip-ff);
+            font-weight: var(--chip-fw, 700); font-size: 12px; text-transform: var(--chip-tt, none);
+            letter-spacing: var(--chip-ls, 0); padding: 7px 16px; border-radius: var(--chip-r, 999px);
+            background: var(--chip-bg); color: var(--chip-c); border: var(--chip-bd); }
+  .d-btn { font-family: var(--btn-ff); font-weight: var(--btn-fw, 700); font-size: 13px;
+           text-transform: var(--btn-tt, none); letter-spacing: var(--btn-ls, 0);
+           padding: 11px 22px; border-radius: var(--btn-r, 12px); background: var(--btn-bg);
+           color: var(--btn-c); border: var(--btn-bd, none); cursor: pointer; }
+  .d-deco { position: absolute; pointer-events: none; }
+
+  /* ===== 01 Bold & Playful Paper ===== */
+  .s01 { --stage:#F7F4EC; --card-bg:#FFFDF8; --card-bd:4px solid #201D18; --card-sh:10px 10px 0 #201D18;
+         --radius:20px; --ink:#201D18; --body-c:#201D18; --kick-ff:'Space Mono',monospace; --kick-c:#201D18;
+         --title-ff:'Archivo Black',sans-serif; --title-fw:400; --title-tt:uppercase; --title-ls:-0.5px;
+         --body-ff:'Archivo',sans-serif; --em-c:#E25C33; --em-style:normal;
+         --chip-ff:'Space Mono',monospace; --chip-bg:#EFC93F; --chip-c:#201D18; --chip-bd:3px solid #201D18; --chip-tt:uppercase;
+         --btn-ff:'Space Mono',monospace; --btn-bg:#201D18; --btn-c:#F7F4EC; --btn-bd:3px solid #201D18; --btn-tt:uppercase; }
+  .s01 .d-deco { width:84px; height:84px; border:4px solid #201D18; border-radius:50%; background:#3D5FD0; top:-20px; right:-20px; }
+
+  /* ===== 02 Glass Aurora ===== */
+  .s02 { --stage: radial-gradient(60% 80% at 12% 8%, rgba(139,92,246,.55), transparent 60%),
+                  radial-gradient(60% 80% at 92% 30%, rgba(34,211,238,.42), transparent 60%),
+                  linear-gradient(160deg,#0B1020,#121935);
+         --card-bg: rgba(255,255,255,.07); --card-bd:1px solid rgba(255,255,255,.18);
+         --card-sh:0 20px 50px rgba(0,0,0,.45); --radius:18px; --ink:#EAF0FF; --body-c:rgba(234,240,255,.66);
+         --kick-ff:'JetBrains Mono',monospace; --kick-c:#22D3EE; --kick-ls:.5px; --kick-tt:none;
+         --title-ff:'Sora',sans-serif; --title-fw:800; --title-ls:-.02em;
+         --body-ff:'Inter',sans-serif; --chip-ff:'JetBrains Mono',monospace; --chip-bg:rgba(255,255,255,.1);
+         --chip-c:#22D3EE; --chip-fw:600; --btn-ff:'Inter',sans-serif;
+         --btn-bg:linear-gradient(120deg,#8B5CF6,#22D3EE 55%,#F472B6); --btn-c:#0B1020; --btn-r:999px; --btn-fw:600; }
+  .s02 .d-card { backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+  .s02 .d-title em { background:linear-gradient(120deg,#8B5CF6,#22D3EE,#F472B6);
+                     -webkit-background-clip:text; background-clip:text; color:transparent; font-style:normal; }
+
+  /* ===== 03 Editorial Ink ===== */
+  .s03 { --stage:#FBFAF7; --card-bg:transparent; --card-bd:0; --card-sh:none; --radius:0; --ink:#14110E; --body-c:#14110E;
+         --kick-ff:'Inter',sans-serif; --kick-c:#6B6256; --kick-ls:1.5px; --kick-fw:600;
+         --title-ff:'Fraunces',serif; --title-fw:700; --title-ls:-.01em; --title-lh:1.05; --title-fs:33px;
+         --body-ff:'Inter',sans-serif; --em-c:#B3261E; --em-style:italic;
+         --chip-ff:'Inter',sans-serif; --chip-bg:transparent; --chip-c:#B3261E; --chip-bd:1px solid #DAD5CB;
+         --chip-fw:600; --chip-tt:uppercase; --chip-ls:1px;
+         --btn-ff:'Inter',sans-serif; --btn-bg:#14110E; --btn-c:#FBFAF7; --btn-r:0; --btn-tt:uppercase; --btn-ls:1px; --btn-fw:600; }
+  .s03 .d-card { border-top:1px solid #DAD5CB; padding-top:22px; }
+  .s03 .d-body::first-letter { font-family:'Fraunces',serif; font-weight:700; float:left;
+                               font-size:3em; line-height:.78; padding:5px 9px 0 0; color:#B3261E; }
+
+  /* ===== 04 Terminal Green ===== */
+  .s04 { --stage:#0A0E0A; --card-bg:#0E140E; --card-bd:1px solid #1FA80F; --card-sh:none; --radius:0;
+         --ink:#4AF626; --body-c:#9EFF8E; --kick-ff:'JetBrains Mono',monospace; --kick-c:#1FA80F;
+         --title-ff:'JetBrains Mono',monospace; --title-fw:800; --title-tt:uppercase; --title-ls:1px; --title-fs:23px;
+         --body-ff:'JetBrains Mono',monospace; --em-c:#FFB000; --em-style:normal;
+         --chip-ff:'JetBrains Mono',monospace; --chip-bg:transparent; --chip-c:#FFB000; --chip-bd:1px solid #FFB000;
+         --chip-r:0; --chip-tt:uppercase; --btn-ff:'JetBrains Mono',monospace; --btn-bg:transparent;
+         --btn-c:#4AF626; --btn-bd:1px solid #1FA80F; --btn-r:0; --btn-tt:uppercase; --btn-ls:1px; }
+  .s04 .d-title { text-shadow:0 0 6px rgba(74,246,38,.55); }
+  .s04 .d-title::after { content:'▌'; animation:blink 1s steps(1) infinite; }
+  .s04 .d-kick::before { content:'$ '; }
+  .s04 .d-body::before { content:'> '; color:#1FA80F; }
+  .s04 .d-stage::after { content:''; position:absolute; inset:0; pointer-events:none;
+                         background:repeating-linear-gradient(transparent 0 2px, rgba(0,0,0,.3) 2px 4px); opacity:.35; }
+  @keyframes blink { 50% { opacity:0; } }
+
+  /* ===== 05 Swiss Grid ===== */
+  .s05 { --stage:#FFFFFF; --card-bg:transparent; --card-bd:0; --card-sh:none; --radius:0; --ink:#111; --body-c:#111;
+         --kick-ff:'Inter',sans-serif; --kick-c:#767676; --kick-ls:1px; --kick-fw:500;
+         --title-ff:'Inter',sans-serif; --title-fw:800; --title-ls:-.02em; --title-lh:1.0; --title-fs:33px;
+         --body-ff:'Inter',sans-serif; --em-c:#E2231A; --em-style:normal;
+         --chip-ff:'Inter',sans-serif; --chip-bg:transparent; --chip-c:#767676; --chip-fw:500; --chip-tt:uppercase; --chip-ls:1px;
+         --btn-ff:'Inter',sans-serif; --btn-bg:#111; --btn-c:#fff; --btn-r:0; --btn-fw:700; }
+  .s05 .d-card { border-top:2px solid #111; padding-top:20px; }
+  .s05 .d-title em { font-style:normal; color:#E2231A; }
+  .s05 .d-chip { padding-left:0; padding-right:18px; }
+
+  /* ===== 06 Soft Pastel ===== */
+  .s06 { --stage:#FFF6FB; --card-bg:#FFFFFF; --card-bd:1px solid rgba(74,68,88,.08);
+         --card-sh:0 14px 34px rgba(150,120,190,.18); --radius:26px; --ink:#4A4458; --body-c:#6F6A7E;
+         --kick-ff:'Nunito',sans-serif; --kick-c:#8A8398; --kick-tt:none; --kick-ls:.5px;
+         --title-ff:'Fredoka',sans-serif; --title-fw:700; --title-lh:1.1;
+         --body-ff:'Nunito',sans-serif; --em-c:#B07FB0; --em-style:normal;
+         --chip-ff:'Nunito',sans-serif; --chip-bg:#C7B6F5; --chip-c:#4A4458;
+         --btn-ff:'Fredoka',sans-serif; --btn-bg:#FFD3B6; --btn-c:#4A4458; --btn-r:16px; --btn-fw:600; }
+  .s06 .d-deco { width:120px; height:120px; background:#B6EAD6;
+                 border-radius:42% 58% 63% 37% / 41% 44% 56% 59%; bottom:-32px; right:-22px; opacity:.7; }
+
+  /* ===== 07 Corporate Trust ===== */
+  .s07 { --stage:#F6F8FC; --card-bg:#FFFFFF; --card-bd:1px solid #E2E8F0;
+         --card-sh:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.06); --radius:14px;
+         --ink:#0F172A; --body-c:#475569; --kick-ff:'Inter',sans-serif; --kick-c:#2563EB; --kick-tt:none; --kick-fw:600; --kick-ls:.3px;
+         --title-ff:'Plus Jakarta Sans',sans-serif; --title-fw:800; --title-ls:-.02em;
+         --body-ff:'Inter',sans-serif; --em-c:#2563EB; --em-style:normal;
+         --chip-ff:'Inter',sans-serif; --chip-bg:#EFF4FF; --chip-c:#2563EB; --chip-fw:600;
+         --btn-ff:'Plus Jakarta Sans',sans-serif; --btn-bg:#2563EB; --btn-c:#fff; --btn-r:10px; --btn-fw:700; }
+  .s07 .d-kick { display:inline-block; background:#EFF4FF; padding:5px 12px; border-radius:999px; }
+  .s07 .d-btn { box-shadow:0 2px 8px rgba(37,99,235,.25); }
+
+  /* ===== 08 Synthwave ===== */
+  .s08 { --stage:linear-gradient(180deg,#1A0B2E,#0B0418); --card-bg:rgba(255,255,255,.05);
+         --card-bd:1px solid rgba(255,46,151,.5); --card-sh:0 0 22px rgba(255,46,151,.4); --radius:8px;
+         --ink:#FDE9FF; --body-c:rgba(253,233,255,.62); --kick-ff:'Share Tech Mono',monospace; --kick-c:#2DE2E6; --kick-ls:1px;
+         --title-ff:'Orbitron',sans-serif; --title-fw:900; --title-tt:uppercase; --title-ls:2px; --title-fs:22px;
+         --body-ff:'Rajdhani',sans-serif; --body-fw:500; --em-c:#2DE2E6; --em-style:normal;
+         --chip-ff:'Share Tech Mono',monospace; --chip-bg:transparent; --chip-c:#2DE2E6; --chip-bd:1px solid #2DE2E6; --chip-r:6px; --chip-tt:uppercase;
+         --btn-ff:'Orbitron',sans-serif; --btn-bg:linear-gradient(180deg,#FF2E97,#FF8A3D); --btn-c:#1A0B2E; --btn-r:6px; --btn-tt:uppercase; --btn-fw:800; }
+  .s08 .d-card { backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); }
+  .s08 .d-title { background:linear-gradient(180deg,#FF2E97,#FF8A3D);
+                  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+  .s08 .d-title em { -webkit-text-fill-color:#2DE2E6; color:#2DE2E6; text-shadow:0 0 14px rgba(45,226,230,.7); }
+  .s08 .d-chip { box-shadow:0 0 14px rgba(45,226,230,.6); }
+  .s08 .d-btn { box-shadow:0 0 16px rgba(255,46,151,.7); }
+  .s08 .d-deco { left:0; right:0; bottom:0; height:64px;
+                 background-image:linear-gradient(#2DE2E6 1px,transparent 1px),linear-gradient(90deg,#2DE2E6 1px,transparent 1px);
+                 background-size:30px 30px; transform:perspective(160px) rotateX(62deg); transform-origin:bottom; opacity:.35; }
+
+  /* ===== 09 Organic Earth ===== */
+  .s09 { --stage:#F4EFE6; --card-bg:#FBF8F2; --card-bd:1px solid #E4DCCB; --card-sh:0 10px 30px rgba(80,60,30,.10);
+         --radius:22px; --ink:#2B2A24; --body-c:#6F6A5C; --kick-ff:'DM Sans',sans-serif; --kick-c:#6F6A5C; --kick-ls:1.5px; --kick-fw:700;
+         --title-ff:'DM Serif Display',serif; --title-fw:400; --title-lh:1.1;
+         --body-ff:'DM Sans',sans-serif; --em-c:#C26B4E; --em-style:italic;
+         --chip-ff:'DM Sans',sans-serif; --chip-bg:#8FA98B; --chip-c:#2B2A24;
+         --btn-ff:'DM Sans',sans-serif; --btn-bg:#C26B4E; --btn-c:#FBF8F2; --btn-r:999px; --btn-fw:700; }
+  .s09 .d-deco { width:108px; height:108px; background:#D8A23A;
+                 border-radius:60% 40% 55% 45% / 55% 50% 50% 45%; top:-22px; right:-22px; opacity:.55; }
+
+  /* ===== 10 Luxe Noir ===== */
+  .s10 { --stage:#0C0C0E; --card-bg:#15151A; --card-bd:1px solid rgba(237,231,218,.12); --card-sh:0 24px 60px rgba(0,0,0,.5);
+         --radius:4px; --ink:#EDE7DA; --body-c:#8A8478; --kick-ff:'Jost',sans-serif; --kick-c:#C9A24B; --kick-ls:3px; --kick-fw:500;
+         --title-ff:'Cormorant Garamond',serif; --title-fw:500; --title-ls:.5px; --title-lh:1.1; --title-fs:34px;
+         --body-ff:'Jost',sans-serif; --body-fw:300; --em-c:#C9A24B; --em-style:italic;
+         --chip-ff:'Jost',sans-serif; --chip-bg:transparent; --chip-c:#C9A24B; --chip-bd:1px solid rgba(201,162,75,.5);
+         --chip-tt:uppercase; --chip-ls:2px; --chip-fw:500;
+         --btn-ff:'Jost',sans-serif; --btn-bg:transparent; --btn-c:#C9A24B; --btn-bd:1px solid #C9A24B; --btn-r:4px; --btn-tt:uppercase; --btn-ls:2px; --btn-fw:500; }
+  .s10 .d-card::after { content:''; display:block; width:54px; height:1px; background:#C9A24B; margin-top:18px; }
+
+  /* ===== 11 Claymorphism ===== */
+  .s11 { --stage:linear-gradient(135deg,#ECE7FF,#FDE8F3); --card-bg:#FBF9FF; --card-bd:0;
+         --card-sh:8px 8px 20px rgba(140,110,220,.35), -8px -8px 18px rgba(255,255,255,.85);
+         --radius:28px; --ink:#4B3F72; --body-c:#6E6390;
+         --kick-ff:'Nunito',sans-serif; --kick-c:#8B7CF6; --kick-tt:none; --kick-fw:700; --kick-ls:.3px;
+         --title-ff:'Baloo 2',sans-serif; --title-fw:700; --title-lh:1.1;
+         --body-ff:'Nunito',sans-serif; --body-fw:600; --em-c:#FF6FA5; --em-style:normal;
+         --chip-ff:'Nunito',sans-serif; --chip-bg:#FFD36E; --chip-c:#4B3F72; --chip-fw:700;
+         --btn-ff:'Baloo 2',sans-serif; --btn-bg:#FF8FB1; --btn-c:#fff; --btn-r:18px; --btn-fw:700; }
+  .s11 .d-chip { box-shadow:4px 4px 12px rgba(140,110,220,.3), -4px -4px 10px rgba(255,255,255,.8); }
+  .s11 .d-btn { box-shadow:6px 6px 14px rgba(140,110,220,.4), -6px -6px 12px rgba(255,255,255,.7); }
+  .s11 .d-deco { width:120px; height:120px; border-radius:50%; background:#7FE0C9;
+                 box-shadow:inset 4px 4px 10px rgba(255,255,255,.6), 8px 8px 18px rgba(140,110,220,.3);
+                 bottom:-34px; right:-26px; opacity:.85; }
+
+  /* ===== 12 Neumorphic Soft UI ===== */
+  .s12 { --stage:#E0E5EC; --card-bg:#E0E5EC; --card-bd:0;
+         --card-sh:8px 8px 16px #BEC3CA, -8px -8px 16px #FFFFFF; --radius:20px;
+         --ink:#41485A; --body-c:#6B7280;
+         --kick-ff:'Poppins',sans-serif; --kick-c:#9AA3B2; --kick-tt:uppercase; --kick-fw:600; --kick-ls:1px;
+         --title-ff:'Poppins',sans-serif; --title-fw:700; --title-ls:-.01em;
+         --body-ff:'Poppins',sans-serif; --em-c:#5B7CFA; --em-style:normal;
+         --chip-ff:'Poppins',sans-serif; --chip-bg:#E0E5EC; --chip-c:#5B7CFA; --chip-fw:600;
+         --btn-ff:'Poppins',sans-serif; --btn-bg:#5B7CFA; --btn-c:#fff; --btn-r:14px; --btn-fw:600; }
+  .s12 .d-chip { box-shadow:4px 4px 8px #BEC3CA, -4px -4px 8px #FFFFFF; }
+  .s12 .d-btn { box-shadow:6px 6px 12px #BEC3CA, -6px -6px 12px #FFFFFF; }
+
+  /* ===== 13 Memphis Pop ===== */
+  .s13 { --stage:#FFFDF7; --card-bg:#FFFFFF; --card-bd:3px solid #121212; --card-sh:6px 6px 0 #00C2CB;
+         --radius:14px; --ink:#121212; --body-c:#333333;
+         --kick-ff:'Poppins',sans-serif; --kick-c:#FF3B7B; --kick-tt:uppercase; --kick-fw:700; --kick-ls:1px;
+         --title-ff:'Righteous',sans-serif; --title-fw:400; --title-ls:.5px;
+         --body-ff:'Poppins',sans-serif; --body-fw:500; --em-c:#7A5CFF; --em-style:normal;
+         --chip-ff:'Poppins',sans-serif; --chip-bg:#FFC43D; --chip-c:#121212; --chip-bd:2px solid #121212; --chip-tt:uppercase; --chip-fw:700; --chip-ls:1px;
+         --btn-ff:'Righteous',sans-serif; --btn-bg:#FF3B7B; --btn-c:#fff; --btn-bd:2px solid #121212; --btn-r:10px; }
+  .s13 .d-deco { width:96px; height:96px; top:-16px; right:-16px; opacity:.9;
+                 background-image:radial-gradient(#7A5CFF 32%, transparent 33%); background-size:22px 22px; }
+
+  /* ===== 14 Risograph Print ===== */
+  .s14 { --stage:#F5F0E1; --card-bg:#FBF7EA; --card-bd:0; --card-sh:none; --radius:4px;
+         --ink:#1F1B16; --body-c:#4A4439;
+         --kick-ff:'Space Mono',monospace; --kick-c:#FF4D8D; --kick-tt:uppercase; --kick-ls:1px;
+         --title-ff:'Space Grotesk',sans-serif; --title-fw:700; --title-ls:-.01em;
+         --body-ff:'Space Grotesk',sans-serif; --em-c:#2353FF; --em-style:normal;
+         --chip-ff:'Space Mono',monospace; --chip-bg:#FF4D8D; --chip-c:#FBF7EA; --chip-r:4px; --chip-tt:uppercase; --chip-ls:1px;
+         --btn-ff:'Space Grotesk',sans-serif; --btn-bg:#2353FF; --btn-c:#FBF7EA; --btn-r:4px; --btn-fw:700; }
+  .s14 .d-title { text-shadow:2px 2px 0 rgba(255,77,141,.55); }
+  .s14 .d-deco { width:120px; height:120px; border-radius:50%; background:#2353FF;
+                 mix-blend-mode:multiply; top:-30px; right:-22px; opacity:.85; }
+  .s14 .d-stage::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:.5;
+                         background-image:radial-gradient(rgba(31,27,22,.16) 1px, transparent 1px); background-size:3px 3px; }
+
+  /* ===== 15 Bauhaus Primary ===== */
+  .s15 { --stage:#F4EDE0; --card-bg:#FBF6EC; --card-bd:3px solid #1A1A1A; --card-sh:none; --radius:0;
+         --ink:#1A1A1A; --body-c:#1A1A1A;
+         --kick-ff:'Inter',sans-serif; --kick-c:#1A1A1A; --kick-tt:uppercase; --kick-fw:700; --kick-ls:2px;
+         --title-ff:'Anton',sans-serif; --title-fw:400; --title-tt:uppercase; --title-ls:.5px; --title-lh:1.0; --title-fs:30px;
+         --body-ff:'Inter',sans-serif; --em-c:#E63329; --em-style:normal;
+         --chip-ff:'Inter',sans-serif; --chip-bg:#1E4FD6; --chip-c:#fff; --chip-r:0; --chip-tt:uppercase; --chip-fw:700; --chip-ls:1px;
+         --btn-ff:'Anton',sans-serif; --btn-bg:#E63329; --btn-c:#fff; --btn-bd:3px solid #1A1A1A; --btn-r:0; --btn-tt:uppercase; --btn-ls:1px; }
+  .s15 .d-deco { width:96px; height:96px; border-radius:50%; background:#F4B400; top:-24px; right:-24px; }
+  .s15 .d-card::after { content:''; display:block; width:0; height:0; margin-top:18px;
+                        border-left:26px solid transparent; border-right:26px solid transparent; border-bottom:44px solid #1E4FD6; }
+
+  /* ===== 16 Blueprint Draft ===== */
+  .s16 { --stage:#0B2447; --card-bg:#0E2C57; --card-bd:1px solid rgba(95,224,255,.5); --card-sh:none; --radius:2px;
+         --ink:#EAF2FF; --body-c:rgba(220,235,255,.66);
+         --kick-ff:'IBM Plex Mono',monospace; --kick-c:#5FE0FF; --kick-tt:uppercase; --kick-ls:1.5px;
+         --title-ff:'IBM Plex Sans',sans-serif; --title-fw:700; --title-ls:-.01em;
+         --body-ff:'IBM Plex Sans',sans-serif; --em-c:#5FE0FF; --em-style:normal;
+         --chip-ff:'IBM Plex Mono',monospace; --chip-bg:transparent; --chip-c:#5FE0FF; --chip-bd:1px solid rgba(95,224,255,.5); --chip-r:2px; --chip-tt:uppercase; --chip-ls:1.5px;
+         --btn-ff:'IBM Plex Mono',monospace; --btn-bg:transparent; --btn-c:#EAF2FF; --btn-bd:1px solid #5FE0FF; --btn-r:2px; --btn-tt:uppercase; --btn-ls:1px; }
+  .s16 .d-stage::after { content:''; position:absolute; inset:0; pointer-events:none;
+                         background-image:linear-gradient(rgba(220,235,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(220,235,255,.12) 1px,transparent 1px);
+                         background-size:22px 22px; }
+  .s16 .d-card { position:relative; }
+  .s16 .d-card::before, .s16 .d-card::after { content:''; position:absolute; width:12px; height:12px; border:1px solid #5FE0FF; }
+  .s16 .d-card::before { top:8px; left:8px; border-right:0; border-bottom:0; }
+  .s16 .d-card::after  { bottom:8px; right:8px; border-left:0; border-top:0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .s04 .d-title::after { animation: none; }
+  }
+  .d-btn:focus-visible, .file:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <h1>Style Library — sixteen boilerplates</h1>
+    <p>Sixteen distinct, paste-into-your-agent design systems, each documented as a self-contained sheet in the same seven-section format. Every panel below renders the same little composition — kicker, headline, body, chip, button — so the difference you see is the system, not the content.</p>
+    <p class="how">To use one: copy its <code>NN-name.md</code> into your repo as <code>STYLE.md</code> and tell your agent <em>"Follow STYLE.md for all styling."</em> The full comparison lives in <code>00-MASTER-BREAKDOWN.md</code>.</p>
+  </header>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+  const STYLES = [
+    { id:'s01', num:'01', name:'Bold & Playful Paper', desc:'Neo-brutalist warm paper — thick black borders, hard offset shadows.', sw:['#F7F4EC','#E25C33','#3D5FD0','#EFC93F'], fonts:'Archivo Black · Archivo · Space Mono', file:'01-bold-playful-paper.md' },
+    { id:'s02', num:'02', name:'Glass Aurora', desc:'Frosted glass panels floating over soft aurora glows. Dark, premium.', sw:['#0B1020','#8B5CF6','#22D3EE','#F472B6'], fonts:'Sora · Inter · JetBrains Mono', file:'02-glass-aurora.md' },
+    { id:'s03', num:'03', name:'Editorial Ink', desc:'Literary magazine — big serif, hairline rules, one editor’s red.', sw:['#FBFAF7','#14110E','#B3261E','#6B6256'], fonts:'Fraunces · Inter', file:'03-editorial-ink.md' },
+    { id:'s04', num:'04', name:'Terminal Green', desc:'CRT phosphor command line. Monospace, scanlines, blinking cursor.', sw:['#0A0E0A','#4AF626','#FFB000','#1FA80F'], fonts:'JetBrains Mono', file:'04-terminal-green.md' },
+    { id:'s05', num:'05', name:'Swiss Grid', desc:'International Typographic Style — strict grid, flush-left, one red.', sw:['#FFFFFF','#111111','#E2231A','#767676'], fonts:'Inter', file:'05-swiss-grid.md' },
+    { id:'s06', num:'06', name:'Soft Pastel', desc:'Gentle rounded candy — pastel washes, soft tinted shadows.', sw:['#FFF6FB','#C7B6F5','#B6EAD6','#FFD3B6'], fonts:'Fredoka · Nunito', file:'06-soft-pastel.md' },
+    { id:'s07', num:'07', name:'Corporate Trust', desc:'Clean SaaS / fintech — white cards, one confident blue, tidy grid.', sw:['#F6F8FC','#2563EB','#0EA5A4','#0F172A'], fonts:'Plus Jakarta Sans · Inter · JetBrains Mono', file:'07-corporate-trust.md' },
+    { id:'s08', num:'08', name:'Synthwave', desc:'80s retro-future — neon glow, sunset gradient, grid horizon.', sw:['#1A0B2E','#FF2E97','#2DE2E6','#FF8A3D'], fonts:'Orbitron · Rajdhani · Share Tech Mono', file:'08-synthwave.md' },
+    { id:'s09', num:'09', name:'Organic Earth', desc:'Tactile clay & olive craft — organic shapes, warm serif, muted tones.', sw:['#F4EFE6','#C26B4E','#6B7A3F','#D8A23A'], fonts:'DM Serif Display · DM Sans', file:'09-organic-earth.md' },
+    { id:'s10', num:'10', name:'Luxe Noir', desc:'Black & gold quiet luxury — elegant serif, gold used as jewelry.', sw:['#0C0C0E','#C9A24B','#EDE7DA','#8A8478'], fonts:'Cormorant Garamond · Jost', file:'10-luxe-noir.md' },
+    { id:'s11', num:'11', name:'Claymorphism', desc:'Puffy 3D clay — pastel gradients, fat rounding, dual squishy shadows.', sw:['#ECE7FF','#FF8FB1','#8B7CF6','#7FE0C9'], fonts:'Baloo 2 · Nunito', file:'11-claymorphism.md' },
+    { id:'s12', num:'12', name:'Neumorphic Soft UI', desc:'Monochrome extruded surfaces from one gray, twin light/dark shadows.', sw:['#E0E5EC','#5B7CFA','#BEC3CA','#41485A'], fonts:'Poppins', file:'12-neumorphic-soft-ui.md' },
+    { id:'s13', num:'13', name:'Memphis Pop', desc:'80s geometric confetti — primaries, black outlines, hard color shadows.', sw:['#FFFDF7','#FF3B7B','#00C2CB','#FFC43D'], fonts:'Righteous · Poppins', file:'13-memphis-pop.md' },
+    { id:'s14', num:'14', name:'Risograph Print', desc:'Duotone riso — two fluoro inks, grain, multiply overlap, misregistration.', sw:['#F5F0E1','#FF4D8D','#2353FF','#1F1B16'], fonts:'Space Grotesk · Space Mono', file:'14-risograph-print.md' },
+    { id:'s15', num:'15', name:'Bauhaus Primary', desc:'Red/blue/yellow + black on cream — pure geometric shapes on a grid.', sw:['#F4EDE0','#E63329','#1E4FD6','#F4B400'], fonts:'Anton · Inter', file:'15-bauhaus-primary.md' },
+    { id:'s16', num:'16', name:'Blueprint Draft', desc:'Technical blueprint — cyan line work on deep blue, grid, dimension ticks.', sw:['#0B2447','#5FE0FF','#EAF2FF','#2BB7E0'], fonts:'IBM Plex Sans · IBM Plex Mono', file:'16-blueprint-draft.md' },
+  ];
+
+  const demoInner = `
+    <div class="d-stage">
+      <div class="d-card">
+        <span class="d-kick">Phase 02 · Setup</span>
+        <h3 class="d-title">Title about something <em>very interesting</em></h3>
+        <p class="d-body">A short line of body copy showing the face, color, and rhythm this system gives you. Same words everywhere — only the styling changes.</p>
+        <div class="d-actions">
+          <span class="d-chip">Featured</span>
+          <button class="d-btn" type="button">Get started</button>
+        </div>
+      </div>
+      <span class="d-deco" aria-hidden="true"></span>
+    </div>`;
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = STYLES.map(s => `
+    <section class="panel">
+      <div class="panel-meta">
+        <div class="panel-head">
+          <span class="panel-num">${s.num}</span>
+          <div>
+            <h2 class="panel-name">${s.name}</h2>
+            <p class="panel-desc">${s.desc}</p>
+          </div>
+        </div>
+        <div class="panel-sub">
+          <span class="swatches">${s.sw.map(c => `<span style="background:${c}"></span>`).join('')}</span>
+          <span class="fonts">${s.fonts}</span>
+          <span class="file">${s.file}</span>
+        </div>
+      </div>
+      <div class="demo ${s.id}">${demoInner}</div>
+    </section>`).join('');
+</script>

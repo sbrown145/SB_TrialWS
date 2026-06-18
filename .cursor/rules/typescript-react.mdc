@@ -1,0 +1,57 @@
+---
+description: TypeScript, React, and Gatsby conventions for this codebase
+globs: src/**/*.ts,src/**/*.tsx,gatsby-*.ts,gatsby-*.js
+alwaysApply: false
+---
+
+# TypeScript / React / Gatsby
+
+## TypeScript
+
+- **Strict mode.** `tsconfig.json` is strict; no implicit `any`, no unused
+  locals. Type the public surface (component props, data exports, helpers).
+- **Shared shapes live in `src/types/`.** Import them (`import { Project } from
+  '../types'`); never redefine `Project`, `Role`, `SkillGroup`, or `Accent`
+  inline in a component or data file.
+- **Prefer `interface` for object shapes, `type` for unions/aliases** (matches
+  the existing `src/types/` guidance: `interface Project`, `type Accent`).
+
+## React components
+
+- **Function components only**, typed as `React.FC` or with an explicit props
+  interface. One component per file; the filename matches the component
+  (`Layout.tsx` → `Layout`).
+- **Components are presentational.** They receive data via props or import it
+  from `src/data/`. No data fetching, no business logic — this is a static site.
+- **Compose, don't nest routing.** Pages in `src/pages/` wrap content in
+  `ThemeProvider` + `Layout`; components never import page-level providers.
+
+## Gatsby specifics
+
+- **File-based routing.** Each file in `src/pages/` is a route. Add a route by
+  adding a file, following the template in `src/pages/README.md`.
+- **Internal links use Gatsby `<Link>`**, not `<a href>`. With flat URLs (default
+  empty `pathPrefix`), paths are root-relative (`/`, `/projects/personal`). For
+  optional subpath deploys, set `PATH_PREFIX` and build with `--prefix-paths`.
+- **SEO via the `Head` export.** Export a named `Head: HeadFC` from each page
+  for `<title>` and meta tags — don't manage the document head manually.
+- **SSR safety is mandatory.** Gatsby builds on the server. Guard any
+  browser-only API:
+
+```tsx
+const isBrowser = typeof window !== 'undefined';
+// Access window / document / localStorage only inside useEffect or behind isBrowser.
+```
+
+Unguarded `window`/`localStorage` access at module or render scope will fail the
+`gatsby build`.
+
+## Context
+
+- The theme provider (`src/context/ThemeContext.tsx`) is the only cross-cutting
+  state. `useTheme()` must throw if called outside `ThemeProvider`.
+
+## Verifying
+
+- Run `npm run typecheck` after type or component changes. Do **not** start the
+  dev server — the user runs it.

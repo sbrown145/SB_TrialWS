@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Gatsby
+.cache/
+public/
+
+# GraphQL typegen (gatsby-config: graphqlTypegen)
+src/gatsby-types.d.ts
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Environment variables (.env.example is tracked as a template)
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Tooling caches
+.eslintcache
+.npm
+*.tsbuildinfo
+
+# Temp
+*.tmp
+*.temp

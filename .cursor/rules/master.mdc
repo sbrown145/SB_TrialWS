@@ -1,0 +1,118 @@
+---
+description: Master rule — project overview, conventions, clarification protocol, and chat interaction guidelines
+alwaysApply: true
+---
+
+# portfolio — master rule
+
+The single always-applied rule that governs both the project and how the
+assistant should work in this repo. Project overview, hard conventions, the
+*clarification protocol*, and the *chat interaction guidelines* all live here.
+
+## Project overview
+
+A personal portfolio site built with **Gatsby**, **TypeScript**, and
+**Tailwind CSS**. Statically built and deployed to **GitHub Pages**. There is no
+backend, database, or server — all content is static and rendered at build time.
+
+This repo is a **learning-oriented boilerplate**: `src/` ships with a
+`README.md` in each subfolder describing what to build, but no implementation
+files yet. The READMEs are canonical guidance — follow them when scaffolding.
+
+## Tech stack
+
+| Concern | Choice |
+|---|---|
+| Framework | Gatsby 5 (file-based routing, `Head` API, SSR + static build) |
+| Language | TypeScript 5 (strict) |
+| UI | React 18 |
+| Styling | Tailwind CSS 3 + PostCSS, custom "Bold & Playful Paper" theme |
+| Theme | Dark/light via React context (`localStorage` + system preference) |
+| Deploy | GitHub Actions → GitHub Pages (`gh-pages` branch) |
+
+## Source layout
+
+```
+src/
+  types/        → shared TypeScript shapes (Project, Role, SkillGroup, Accent)
+  data/         → static portfolio content as typed exports (no JSX)
+  styles/       → global.css: Tailwind layers + design tokens (CSS vars)
+  context/      → ThemeContext (dark/light, SSR-guarded)
+  components/   → presentational React components (Layout, Hero, cards, grids)
+  pages/        → Gatsby routes; compose components + ThemeProvider
+    projects/   → filtered project listing pages
+  images/       → static assets
+```
+
+Recommended build order: `types/` → `data/` → `styles/` → `context/` →
+`components/` → `pages/`. Each subfolder `README.md` has the details.
+
+## Conventions — do not violate
+
+1. **Content lives in `data/`, never hard-coded in components.** Components are
+   presentational and import typed data; editing copy must not require touching
+   JSX.
+2. **Types are the contract between `data/` and `components/`.** Shared shapes
+   live in `src/types/`; don't duplicate or inline them.
+3. **Guard browser-only APIs.** Gatsby renders on the server first. Accessing
+   `window`, `document`, or `localStorage` outside `useEffect` will break the
+   build — guard with `typeof window !== 'undefined'`.
+4. **Styling goes through Tailwind + design tokens.** Use the semantic colors
+   (`bg`, `ink`, `a1`–`a4`) wired to CSS variables in `tailwind.config.js`; do
+   not hard-code hex values in components.
+5. **Routing is file-based.** A page exists because a file exists in
+   `src/pages/`. Don't invent a router.
+6. **Flat URLs by default.** The site publishes at the domain root with an empty
+   `pathPrefix`. Internal links use Gatsby `<Link>`; never hard-code absolute paths.
+   Optional subpath deploys use `PATH_PREFIX` — see `src/pages/routing/README.md`.
+
+## Environment
+
+- Node 18+ (matches CI). `npm install` to set up.
+- `npm run develop` for the dev server, `npm run typecheck` to run `tsc --noEmit`.
+- **Never start the dev server yourself** — the user runs it.
+- `npm run build:gh-pages` produces the production build for flat URLs;
+  `npm run deploy` publishes to the `gh-pages` branch.
+
+---
+
+## Clarification protocol — REQUIRED for non-trivial work
+
+Before starting any implementation, the assistant **must** ask focused,
+numbered clarifying questions when **any** of the following is true:
+
+- The change touches **more than 2 files**.
+- A **new dependency** is added to `package.json`.
+- The change modifies **build/deploy config**: `gatsby-config.ts`,
+  `gatsby-browser.js`, `tailwind.config.js`, `tsconfig.json`,
+  `postcss.config.js`, or `.github/workflows/`.
+- The change is **architectural**: a new page route, a new shared type, a new
+  context provider, or a change to the design-token system.
+
+When the protocol fires:
+
+1. List the assumptions you would otherwise make.
+2. Ask numbered questions to remove each assumption.
+3. For larger efforts, write a plan to
+   `.cursor/plans/<YYYY-MM-DD>-<slug>.plan.md` (the `.plan.md` suffix lets
+   Cursor expose it as a selectable target).
+4. Request explicit sign-off before executing.
+
+Trivial fixes (typos, single-file bug fixes, copy edits, comment edits) bypass
+this protocol — proceed directly.
+
+---
+
+## Chat interaction guidelines
+
+- **Run the clarification protocol** when its trigger fires. Don't guess on
+  non-trivial changes.
+- **Run the preflight check** (`.cursor/commands/preflight.md`) before larger
+  changes. Score yourself 0-100 on confidence and surface what's underspecified.
+- **Show the plan first** for anything architectural; request sign-off before
+  code changes.
+- **No Cursor attribution in commits or PRs.** Never add lines like *"🤖
+  Generated with Cursor"* or *"Co-authored-by: Cursor"*. Use the local OS git
+  identity as-is. Follow `.cursor/commands/git-commit.md` for the format.
+- **Reference commands by path.** When a procedure exists (commit format, code
+  review checklist), link to `.cursor/commands/<name>.md` rather than restating.

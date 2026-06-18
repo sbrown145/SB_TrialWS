@@ -1,0 +1,52 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "portfolio",
+  "author": "JackBergin",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "build:gh-pages": "gatsby build --prefix-paths",
+    "build:gh-pages:root": "PATH_PREFIX= gatsby build",
+    "serve:gh-pages": "gatsby serve --prefix-paths",
+    "serve:gh-pages:root": "PATH_PREFIX= gatsby serve",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "deploy": "npm run clean && npm run build:gh-pages && gh-pages -d public",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "gatsby": "^5.16.0",
+    "gatsby-plugin-html-attributes": "^1.0.5",
+    "gatsby-plugin-postcss": "^6.16.0",
+    "postcss": "^8.5.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.8.3"
+  },
+  "overrides": {
+    "lodash": ">=4.17.24",
+    "multer": ">=2.2.0",
+    "ws": ">=8.21.0",
+    "cookie": "^0.7.0",
+    "path-to-regexp": "0.1.13",
+    "immutable": "^3.8.3",
+    "tmp": ">=0.2.6",
+    "js-yaml": ">=4.1.2",
+    "serialize-javascript": ">=7.0.5",
+    "webpack": ">=5.104.1",
+    "uuid": "^11.1.1"
+  }
+}
