@@ -1,9 +1,9 @@
 {
-  "name": "portfolio",
+  "name": "SB_TrialWS",
   "version": "1.0.0",
   "private": true,
-  "description": "portfolio",
-  "author": "JackBergin",
+  "description": "Shawn Brown's portfolio",
+  "author": "sbrown145",
   "keywords": [
     "gatsby"
   ],
