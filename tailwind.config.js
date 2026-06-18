@@ -8,48 +8,35 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // "Bold & Playful Paper" palette — wired to CSS variables so the
-        // ink/paper theme toggle can swap them at runtime.
         bg: 'rgb(var(--bg-rgb) / <alpha-value>)',
-        panel: 'rgb(var(--panel-rgb) / <alpha-value>)',
-        card: 'rgb(var(--card-rgb) / <alpha-value>)',
         ink: 'rgb(var(--ink-rgb) / <alpha-value>)',
-        a1: 'rgb(var(--a1-rgb) / <alpha-value>)', // coral
-        a2: 'rgb(var(--a2-rgb) / <alpha-value>)', // cobalt
-        a3: 'rgb(var(--a3-rgb) / <alpha-value>)', // green
-        a4: 'rgb(var(--a4-rgb) / <alpha-value>)', // yellow
+        glass: 'rgb(var(--glass-rgb) / <alpha-value>)',
+        a1: 'rgb(var(--a1-rgb) / <alpha-value>)',
+        a2: 'rgb(var(--a2-rgb) / <alpha-value>)',
+        a3: 'rgb(var(--a3-rgb) / <alpha-value>)',
+        a4: 'rgb(var(--a4-rgb) / <alpha-value>)',
       },
       fontFamily: {
-        display: ['"Archivo Black"', 'sans-serif'],
-        body: ['Archivo', 'sans-serif'],
-        mono: ['"Space Mono"', 'monospace'],
+        display: ['Sora', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        hard: '10px 10px 0 var(--ink)',
-        'hard-sm': '6px 6px 0 var(--ink)',
-        'hard-lg': '14px 14px 0 var(--ink)',
-      },
-      borderWidth: {
-        3: '3px',
-        4: '4px',
+        glass: '0 20px 60px rgba(0, 0, 0, 0.45)',
+        glow: '0 0 60px rgba(139, 92, 246, 0.45)',
       },
       borderRadius: {
-        card: '24px',
-        chunk: '36px',
+        card: '20px',
+        pill: '999px',
       },
       keyframes: {
         rise: {
           from: { opacity: '0', transform: 'translateY(14px)' },
           to: { opacity: '1', transform: 'none' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-12px)' },
-        },
       },
       animation: {
         rise: 'rise .5s ease-out both',
-        float: 'float 6s ease-in-out infinite',
       },
     },
   },

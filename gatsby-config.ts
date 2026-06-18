@@ -7,16 +7,16 @@ import type { GatsbyConfig } from "gatsby";
 //   PATH_PREFIX=/my-repo     → a project repo with a different name
 // The prefix only applies when building with `--prefix-paths` (see package.json).
 // See src/pages/routing/README.md for the full matrix.
-const pathPrefix = process.env.PATH_PREFIX ?? "/portfolio";
+const pathPrefix = process.env.PATH_PREFIX ?? "/SB_TrialWS";
 
 const config: GatsbyConfig = {
   pathPrefix,
   siteMetadata: {
-    title: `Jack Bergin Portfolio`,
+    title: `Shawn Brown — Scientist / Engineer`,
     siteUrl:
       process.env.SITE_URL ??
       (process.env.NODE_ENV === "production"
-        ? "https://jackbergin.github.io/portfolio"
+        ? "https://sbrown145.github.io/SB_TrialWS"
         : "http://localhost:8000"),
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.

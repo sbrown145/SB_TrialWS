@@ -6,42 +6,42 @@ alwaysApply: false
 
 # Styling — Tailwind + design tokens
 
-This project uses **Tailwind CSS** with a custom **"Bold & Playful Paper"**
-theme: warm paper surfaces, heavy ink borders, offset shadows, four accents.
+This project uses **Tailwind CSS** with the **Glass Aurora** theme: dark midnight
+background, frosted glass panels, soft aurora glows, violet/cyan/pink accents.
 
 ## Design tokens
 
 - **Colors are CSS custom properties** defined in `src/styles/global.css`, as
-  RGB channels (`--bg-rgb: 247 244 236`) so Tailwind opacity modifiers work
-  (`text-ink/60`, `bg-bg/85`).
-- **Semantic colors only.** Use `bg`, `ink`, `panel`, `card`, and `a1`–`a4`
-  wired through `tailwind.config.js`. Never hard-code hex/rgb values in
-  components or className strings.
-- **Light + dark** share the same accents; dark mode is the `.dark` class on
-  `<html>`, toggled by `ThemeContext`. New tokens must be defined for both.
+  RGB channels (`--bg-rgb: 11 16 32`) so Tailwind opacity modifiers work
+  (`text-ink/60`, `bg-glass/6`).
+- **Semantic colors only.** Use `bg`, `ink`, `glass`, and `a1`–`a4` wired
+  through `tailwind.config.js`. Never hard-code hex/rgb values in components or
+  className strings.
+- **Dark-only.** Glass Aurora is a single dark aesthetic; no light/dark toggle.
 
 ## Reusable component classes
 
 Defined in `global.css`; prefer these over re-deriving utility soup:
-`.card` / `.card--shadow`, `.btn` / `.btn--ghost`, `.chip` / `.chip--btn` /
-`.chip--active`, `.lift`, `.nav-link` / `.nav-link--active`, `.font-display` /
-`.kicker`, `.shape` / `.fill-a1`–`.fill-a4`, `.paper-grid`, `.rise`.
+`.card` / `.card--hero`, `.btn` / `.btn--ghost`, `.chip` / `.chip--btn` /
+`.chip--active`, `.grad-text`, `.nav-link` / `.nav-link--active`, `.font-display` /
+`.kicker`, `.fill-a1`–`.fill-a4`, `.aurora-bg`, `.rise`.
 
 ## Layout conventions
 
 - Section wrapper: `max-w-6xl mx-auto px-4 sm:px-6 py-20`
-- Section kicker/label: `kicker text-ink/60 mb-3`
+- Section kicker/label: `kicker mb-3`
 - Section heading: `font-display text-4xl sm:text-5xl`
 - Project/listing grids are responsive 1 → 2 → 3 columns.
+- Generous dark spacing between glass panels.
 
 ## Rules
 
 - **Tokens before new values.** Adding a color or shadow means adding a CSS
   variable + a Tailwind mapping, not inlining a literal.
-- **Respect `prefers-reduced-motion`** for entrance animations (`.rise`,
-  `.lift`).
+- **Respect `prefers-reduced-motion`** for entrance animations (`.rise`).
 - **Keep `tailwind.config.js` and `global.css` in sync** — every semantic color
   in the config must resolve to a defined CSS variable.
 - Global styles are imported once via `gatsby-browser.js`
   (`import "./src/styles/global.css"`); don't import CSS into individual
   components.
+- Gradients are glow and text accents only — never flat card backgrounds.

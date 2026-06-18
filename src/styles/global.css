@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-rgb: 11 16 32;
+  --bg-2-rgb: 18 25 53;
+  --glass-rgb: 255 255 255;
+  --glass-2-rgb: 255 255 255;
+  --stroke-rgb: 255 255 255;
+  --ink-rgb: 234 240 255;
+  --a1-rgb: 139 92 246;
+  --a2-rgb: 34 211 238;
+  --a3-rgb: 244 114 182;
+  --a4-rgb: 34 211 238;
+
+  --bg: rgb(var(--bg-rgb));
+  --bg-2: rgb(var(--bg-2-rgb));
+  --glass: rgba(var(--glass-rgb), 0.06);
+  --glass-2: rgba(var(--glass-2-rgb), 0.1);
+  --stroke: rgba(var(--stroke-rgb), 0.16);
+  --ink: rgb(var(--ink-rgb));
+  --muted: rgba(234, 240, 255, 0.62);
+  --grad: linear-gradient(120deg, rgb(var(--a1-rgb)), rgb(var(--a2-rgb)) 55%, rgb(var(--a3-rgb)));
+  --blur: blur(18px);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --glow: 0 0 60px rgba(139, 92, 246, 0.45);
+  --radius: 20px;
+  --radius-pill: 999px;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-body text-ink antialiased;
+    background:
+      radial-gradient(60% 50% at 20% 10%, rgba(139, 92, 246, 0.25), transparent 60%),
+      radial-gradient(50% 50% at 90% 30%, rgba(34, 211, 238, 0.18), transparent 60%),
+      radial-gradient(40% 40% at 50% 80%, rgba(244, 114, 182, 0.12), transparent 60%),
+      linear-gradient(160deg, var(--bg), var(--bg-2));
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .aurora-bg {
+    background:
+      radial-gradient(60% 50% at 20% 10%, rgba(139, 92, 246, 0.25), transparent 60%),
+      radial-gradient(50% 50% at 90% 30%, rgba(34, 211, 238, 0.18), transparent 60%),
+      radial-gradient(40% 40% at 50% 80%, rgba(244, 114, 182, 0.12), transparent 60%),
+      linear-gradient(160deg, var(--bg), var(--bg-2));
+  }
+
+  .card {
+    background: var(--glass);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+  }
+
+  .card--hero {
+    box-shadow: var(--shadow), var(--glow);
+  }
+
+  .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .chip {
+    @apply inline-flex items-center font-mono text-xs;
+    padding: 6px 16px;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-pill);
+    background: var(--glass-2);
+    color: rgb(var(--a2-rgb));
+    letter-spacing: 0.5px;
+  }
+
+  .chip--btn {
+    @apply cursor-pointer transition-colors;
+  }
+
+  .chip--btn:hover {
+    background: rgba(var(--glass-2-rgb), 0.18);
+  }
+
+  .chip--active {
+    background: rgba(var(--a1-rgb), 0.2);
+    border-color: rgba(var(--a1-rgb), 0.4);
+    color: rgb(var(--a2-rgb));
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center font-body font-semibold cursor-pointer transition-opacity;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--grad);
+    color: rgb(var(--bg-rgb));
+    padding: 13px 24px;
+  }
+
+  .btn:hover {
+    @apply opacity-90;
+  }
+
+  .btn--ghost {
+    background: var(--glass-2);
+    color: var(--ink);
+    border: 1px solid var(--stroke);
+  }
+
+  .btn--ghost:hover {
+    background: rgba(var(--glass-2-rgb), 0.18);
+    @apply opacity-100;
+  }
+
+  .kicker {
+    @apply font-mono text-xs tracking-wide;
+    color: rgb(var(--a2-rgb));
+    letter-spacing: 0.5px;
+  }
+
+  .font-display {
+    font-family: Sora, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-link {
+    @apply font-body text-sm text-ink/70 transition-colors hover:text-ink;
+  }
+
+  .nav-link--active {
+    @apply text-ink font-medium;
+  }
+
+  .fill-a1 { background-color: rgb(var(--a1-rgb)); }
+  .fill-a2 { background-color: rgb(var(--a2-rgb)); }
+  .fill-a3 { background-color: rgb(var(--a3-rgb)); }
+  .fill-a4 { background-color: rgb(var(--a4-rgb)); }
+
+  .rise {
+    animation: rise 0.5s ease-out both;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise {
+      animation: none;
+    }
+  }
+}
